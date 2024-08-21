@@ -3,12 +3,10 @@ import { Category } from '../model/category'
 
 export async function createCategory(name, parentCategory) {
     console.log(name, parentCategory)
-    try {
+    
         return await Category.create({
             name, 
-            parent: parentCategory
+            parent: parentCategory || undefined
         })
-    } catch (error) {
-        return error
-    }
+    
 }

@@ -10,21 +10,28 @@ export default function ProductForm({
   desc: existingDesc,
   price: existingPrice,
   images: existingImages,
+  category: assignedCategory,
 }) {
   const router = useRouter();
   const [price, setPrice] = useState(existingPrice || "");
   const [product, setProduct] = useState(existingProduct || "");
   const [images, setImages] = useState(existingImages || []);
+  const [category, setCategory] = useState(assignedCategory || "")
   const [desc, setDesc] = useState(existingDesc || "");
   const [loading, setLoading] = useState(false)
   const [uploading, setUploading] = useState(false)
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    axios.get('/api/categories').then(result=>{
+      setCategories(result.data)
+    })
+  }, []);
 
   async function uploadImages(e) {
     setUploading(true)
     e.preventDefault();
     const files = e.target.files;
     const formData = new FormData();
-    console.log("starting");
     if (files?.length > 0) {
       for (const file of files) {
         formData.append("file", file);
@@ -63,7 +70,8 @@ export default function ProductForm({
             product,
             desc,
             price,
-            images
+            images,
+            category
           }),
         });
         router.push("/products");
@@ -81,7 +89,8 @@ export default function ProductForm({
             product,
             desc,
             price,
-            images
+            images,
+            category
           }),
         });
         router.push("/products");
@@ -95,7 +104,6 @@ export default function ProductForm({
     setImages(images)
   }
 
-  useEffect(() => {}, []);
   return (
     <>
       {loading ? <Spinner /> : 
@@ -109,7 +117,13 @@ export default function ProductForm({
           placeholder="new product"
           onChange={(e) => setProduct(e.target.value)}
         ></input>
-        <label htmlFor="Phtoos"></label>
+        <select value={category} onChange={(e)=>setCategory(e.target.value)}>
+          <option value="">Uncategorized</option>
+          {categories?.length && categories.map(c => (
+            <option value={c._id} key={c._id}>{c.name}</option>
+          ))}
+        </select>
+        <label>Photos</label>
         <div className="mb-2 flex gap-2 flex-wrap">
             <ReactSortable list={images} setList={updateImagesOrder} className="flex flex-wrap gap-1">
           {!!images?.length &&

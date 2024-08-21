@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 
 function Nav() {
   const inactiveLink = "flex gap-1 text-xl mb-2 p-1";
-  const activeLink = inactiveLink + " bg-white text-blue-900 rounded-l-lg";
+  const activeLink = inactiveLink + " bg-white text-blue-900 rounded-l-lg shadow-black shadow-md shadow-right-non";
   const [pathname, setPathName] = useState("");
   useEffect(() => {
     setPathName(window.location.pathname);
   }, []);
   return (
-    <aside className="text-white bg-blue-900 p-4 pr-0 w-[15vw]">
+    <aside className="text-white bg-blue-900 p-4 pr-0 w-[15vw] ">
       <Link href="" className="flex gap-1 mb-4 mr-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"

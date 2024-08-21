@@ -9,23 +9,44 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.633.0",
+    "@radix-ui/react-select": "^2.1.1",
+    "aws-sdk": "^2.1678.0",
     "axios": "^1.7.4",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.4.0",
+    "formidable": "^3.5.1",
+    "fs": "^0.0.1-security",
+    "i": "^0.3.7",
     "jsonwebtoken": "^9.0.2",
+    "mime-types": "^2.1.35",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.3",
+    "multiparty": "^4.2.3",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.20",
+    "next-cloudinary": "^6.10.0",
+    "next-multiparty": "^0.7.0",
+    "next-safe-action": "^7.7.0",
     "nodemailer": "^6.9.14",
+    "npm": "^10.8.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@types/mime-types": "^2.1.4",
+    "@types/multiparty": "^0.0.36",
     "@types/react": "18.3.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "tailwind.config.js",
+  "author": "",
+  "license": "ISC"
 }

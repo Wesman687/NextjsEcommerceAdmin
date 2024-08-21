@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { ReactSortable } from "react-sortablejs";
 import Spinner from '../components/Spinner'
 export default function ProductForm({
   _id,
@@ -34,7 +35,6 @@ export default function ProductForm({
         formData
       );
 
-      console.log(res.data.secure_url, res.data.public_id, "response");
       setImages((oldImages) => {
         return [
           ...oldImages,
@@ -71,7 +71,6 @@ export default function ProductForm({
         throw new Error(console.log(error));
       }
     } else {
-        console.log('adding')
       try {
         const response = await fetch("/api/products", {
           method: "POST",
@@ -92,6 +91,9 @@ export default function ProductForm({
       }
     }
   }
+  function updateImagesOrder(images){
+    setImages(images)
+  }
 
   useEffect(() => {}, []);
   return (
@@ -109,6 +111,7 @@ export default function ProductForm({
         ></input>
         <label htmlFor="Phtoos"></label>
         <div className="mb-2 flex gap-2 flex-wrap">
+            <ReactSortable list={images} setList={updateImagesOrder} className="flex flex-wrap gap-1">
           {!!images?.length &&
             images.map((item, index) => (
               <div key={index} className="relative px-2">
@@ -131,7 +134,8 @@ export default function ProductForm({
                 </svg>
               </div>
             ))}
-
+            </ReactSortable>
+          {uploading ? <div className="h-24 p-1 bg-gray-200 flex items-center rounded-md"><Spinner /></div> : 
           <label className="cursor-pointer w-24 h-24 flex items-center text-center justify-center gap-1 text-gray-500 rounded-md bg-gray-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -154,8 +158,8 @@ export default function ProductForm({
               onChange={uploadImages}
               className="hidden"
             />
-          </label>          
-        {uploading && (<Spinner /> )}
+          </label> }         
+        
         </div>
         
         <label htmlFor="">Description:</label>

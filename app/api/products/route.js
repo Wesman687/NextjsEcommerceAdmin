@@ -3,26 +3,26 @@ import { createProduct, updateProduct } from "../../queries/product";
 import { Product } from "../../model/products";
 
 export const POST = async (request, res) => {
-  const { product, desc, price } = await request.json();
-  const { method } = request;
+  const { product, desc, price, images } = await request.json();
   const url = request.nextUrl.searchParams
   const id = url.get('id')
-  try {
+  console.log('is this working?')
+  
     if (id) {
-        const response = await updateProduct({id, product, desc, price })
+      console.log(product, desc, price, images, "checking if update works")
+        const response = await updateProduct({id, product, desc, price, images })
         throw new NextResponse("Product has been updated", {
           status: 201,
         });
       }
-      if (method === "POST") {
-        await createProduct({ product, desc, price });
+      
+      else {
+        console.log(product, desc, price, images, "checking if post works")
+        await createProduct({ product, desc, price, images });
         throw new NextResponse("Product has been created", {
           status: 201,
         });
-      }
-  } catch (error) {
-    return Response.json(error)
-  }
+      } 
   
 
 };

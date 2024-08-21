@@ -3,12 +3,17 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import axios from "axios";
+import Spinner from '../components/Spinner'
+
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false)
   async function fetchData() {
+    setLoading(true)
     const res = await axios.get("/api/products");
     setProducts(res.data);
+    setLoading(false)
   }
   useEffect(() => {
     fetchData();
@@ -19,6 +24,9 @@ function Products() {
         <Link href={"/products/new"} className="btn-primary">
           Add New Products
         </Link>
+        {loading ? <div className="w-full flex items-center justify-center"><Spinner/></div> 
+        : 
+        <>
         <table className="basic mt-2">
           <thead>
             <tr>
@@ -28,7 +36,7 @@ function Products() {
           </thead>
           <tbody>
             {products?.map((product, index) => (
-              <>
+              
                 <tr key={index}>
                   <td>{product?.product}</td>
                   <td>
@@ -68,10 +76,10 @@ function Products() {
                     </Link>
                   </td>
                 </tr>
-              </>
+              
             ))}
           </tbody>
-        </table>
+        </table></>}
       </Layout>
     </div>
   );

@@ -24,7 +24,7 @@ export default function Layout({children}) {
         ) : (
           <>
           
-            <div className="bg-white flex-grow mt-2 mb-2 mr-2 rounded-lg p-4">
+            <div className="bg-white flex-grow mt-5 mb-5 mr-5 rounded-lg p-4">
               {children}
             </div>
           </>

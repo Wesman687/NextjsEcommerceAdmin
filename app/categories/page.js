@@ -9,10 +9,12 @@ export default withSwal(({ swal, ref }) => {
   const [categories, setCategories] = useState([]);
   const [parentCategory, setParentCategory] = useState();
   const [editedCategory, setEditedCategory] = useState(null);
+  const [properties, setProperties] = useState([])
 
   async function saveCategory(e) {
     e.preventDefault();
-    const data = { name, parentCategory };
+    const data = { name, parentCategory, 
+      properties:  properties.map(p=>({name:p.name, values:p.value.split(',')}))};
     if (editedCategory) {
       try {
         data._id = editedCategory._id;
@@ -22,7 +24,6 @@ export default withSwal(({ swal, ref }) => {
         console.log(error);
       }
     } else {
-      console.log("category updating", data, parentCategory);
       try {
         const result = await axios.post("/api/categories", data);
       } catch (error) {
@@ -32,6 +33,7 @@ export default withSwal(({ swal, ref }) => {
 
     setName("");
     setParentCategory("");
+    setProperties([])
     fetchCategories();
   }
   async function fetchCategories() {
@@ -60,7 +62,32 @@ export default withSwal(({ swal, ref }) => {
         fetchCategories()
       });
   }
-  console.log(categories);
+  function createProperty(e){
+    e.preventDefault()
+    setProperties(prev => {
+      return[...prev, {name:'', value:''}]
+    })    
+  }
+  function handlePropertyNameChange(property, name, index) {
+    setProperties(prev => {
+      const properties = [...prev]
+      properties[index].name = name
+      return properties
+    })
+  }function handlePropertyValuesChange(property, value, index) {
+    setProperties(prev => {
+      const properties = [...prev]
+      properties[index].value = value
+      return properties
+    })
+  }
+  function removeProperty(index){
+    setProperties(prev => {
+      return [...prev].filter((p, pindex) => {
+        return index !== pindex
+      })
+    })
+  }
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -73,8 +100,8 @@ export default withSwal(({ swal, ref }) => {
           : "Create new category"}
       </label>
 
-      <form onSubmit={(e) => saveCategory(e)} className="flex gap-1">
-        <div className="flex gap-1"></div>
+        <div className="flex gap-1 flex-col">
+          
         <div className="flex gap-1 items-center">
           <input
             type="text"
@@ -96,12 +123,29 @@ export default withSwal(({ swal, ref }) => {
                 </option>
               ))}
           </select>
-          <button type="submit" className="btn-primary py-1">
+          </div>
+          <div className="flex gap-1 flex-col">
+          <label>Properties:</label>
+          <button className="btn-default text-sm w-fit mb-1" onClick={(e)=>createProperty(e)}>Add New Property</button>
+          {properties?.length > 0 && properties.map((property, index)=>(
+            <div className="flex gap-1 mb-2" key={index}>
+              <input type="text" className="mb-0 text-sm" value={property.name} onChange={(e)=>handlePropertyNameChange(property, e.target.value, index)} placeholder="property name (example: color" />
+              <input type="text" className="mb-0" value={property.values} onChange={(e)=>handlePropertyValuesChange(property, e.target.value, index)} placeholder="values, comma separated" />
+              
+          <button onClick={()=>removeProperty(index)} className="w-fit btn-default">Remove</button>
+            </div>
+          ))}          
+          </div>
+        </div>
+        <button onClick={()=>{
+          setEditedCategory(null)
+          setName('')
+          setParentCategory('')
+          }} className="btn-default mr-1">Cancel</button>
+        <button type="submit" onClick={(e) => saveCategory(e)}   className="btn-primary w-fit py-1">
             Save
           </button>
-        </div>
-      </form>
-      <table className="basic mt-4">
+      {!editedCategory && <table className="basic mt-4">
         <thead>
           <tr>
             <td>Category Name</td>
@@ -132,7 +176,7 @@ export default withSwal(({ swal, ref }) => {
               </tr>
             ))}
         </tbody>
-      </table>
+      </table>}
     </Layout>
   );
 });

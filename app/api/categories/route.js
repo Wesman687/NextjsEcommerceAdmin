@@ -3,11 +3,11 @@ import { createCategory } from "../../queries/category";
 import { Category } from "../../model/category";
 
 export const POST = async (req, res) => {
-  const { name, parentCategory } = await req.json();
+  const { name, parentCategory, properties } = await req.json();
 
-  console.log(name, parentCategory);
+  console.log(name, parentCategory, properties);
 
-  const response = await createCategory(name, parentCategory || undefined);
+  const response = await createCategory(name, parentCategory, properties || undefined);
   return Response.json("Updated Sucessfully");
 };
 
@@ -17,13 +17,14 @@ export const GET = async (req, res) => {
 };
 
 export const PUT = async (req, res) => {
-  const { name, parentCategory, _id } = await req.json();
-  console.log(name, parentCategory, _id);
+  const { name, parentCategory, properties, _id } = await req.json();
+  console.log(name, parentCategory, properties, _id);
   const response = await Category.findByIdAndUpdate(
     { _id },
     {
       name,
-      parent: parentCategory,
+      parent: parentCategory || undefined,
+      properties
     }
   );
 };

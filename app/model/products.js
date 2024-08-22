@@ -10,7 +10,8 @@ const ProductSchema = new Schema({
       public_id: { type: String },
     },
   ],
-  category: {type:mongoose.Types.ObjectId, ref: 'category', required:false}
+  category: {type:mongoose.Types.ObjectId, ref: 'category', required:false},
+  properties: { type:Object}
 });
 export const Product =
   mongoose.models.product || model("product", ProductSchema);

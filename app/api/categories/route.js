@@ -7,7 +7,7 @@ export const POST = async (req, res) => {
 
   console.log(name, parentCategory, properties);
 
-  const response = await createCategory(name, parentCategory, properties || undefined);
+  const response = await createCategory({name, parentCategory, properties});
   return Response.json("Updated Sucessfully");
 };
 
@@ -23,10 +23,11 @@ export const PUT = async (req, res) => {
     { _id },
     {
       name,
-      parent: parentCategory || undefined,
-      properties
-    }
+      parent: parentCategory || undefined, 
+      properties     
+    },
   );
+  return Response.json('ok');
 };
 
 export const DELETE = async (req, res) => {  

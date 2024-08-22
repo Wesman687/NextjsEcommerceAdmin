@@ -14,12 +14,11 @@ export default withSwal(({ swal, ref }) => {
   async function saveCategory(e) {
     e.preventDefault();
     const data = { name, parentCategory, 
-      properties:  properties.map(p=>({name:p.name, values:p.value.split(',')}))};
+      properties:  properties.map(p=>({name:p.name, value:p.value.split(',')}))};
     if (editedCategory) {
       try {
         data._id = editedCategory._id;
         const result = await axios.put("/api/categories", data);
-        setEditedCategory(null);
       } catch (error) {
         console.log(error);
       }
@@ -32,6 +31,7 @@ export default withSwal(({ swal, ref }) => {
     }
 
     setName("");
+    setEditedCategory(null);
     setParentCategory("");
     setProperties([])
     fetchCategories();
@@ -44,7 +44,13 @@ export default withSwal(({ swal, ref }) => {
   async function editCategory(category) {
     setEditedCategory(category);
     setName(category.name);
-    setParentCategory(category?.parent?._id || "0");
+    setParentCategory(category?.parent?._id || "");
+    if (category?.properties?.length > 0){
+    setProperties(category.properties.map(({name, value})=>({
+      name,
+      value: value.join(',')
+    })))
+  }
   }
   function deleteCategory(category) {
     swal
@@ -130,7 +136,7 @@ export default withSwal(({ swal, ref }) => {
           {properties?.length > 0 && properties.map((property, index)=>(
             <div className="flex gap-1 mb-2" key={index}>
               <input type="text" className="mb-0 text-sm" value={property.name} onChange={(e)=>handlePropertyNameChange(property, e.target.value, index)} placeholder="property name (example: color" />
-              <input type="text" className="mb-0" value={property.values} onChange={(e)=>handlePropertyValuesChange(property, e.target.value, index)} placeholder="values, comma separated" />
+              <input type="text" className="mb-0" value={property.value} onChange={(e)=>handlePropertyValuesChange(property, e.target.value, index)} placeholder="values, comma separated" />
               
           <button onClick={()=>removeProperty(index)} className="w-fit btn-default">Remove</button>
             </div>
@@ -141,6 +147,8 @@ export default withSwal(({ swal, ref }) => {
           setEditedCategory(null)
           setName('')
           setParentCategory('')
+          setProperties([])
+          fetchCategories()
           }} className="btn-default mr-1">Cancel</button>
         <button type="submit" onClick={(e) => saveCategory(e)}   className="btn-primary w-fit py-1">
             Save

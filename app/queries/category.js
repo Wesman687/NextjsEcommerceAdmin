@@ -1,13 +1,9 @@
 import { Category } from '../model/category'
 
 
-export async function createCategory(name, parentCategory, properties) {
-    console.log(name, parentCategory, properties)
+export async function createCategory(properties) {
+    console.log(properties)
     
-        return await Category.create({
-            name, 
-            parent: parentCategory || undefined,
-            properties
-        })
+        return await Category.create(properties)
     
 }

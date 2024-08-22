@@ -16,6 +16,7 @@ export default function ProductForm({
   const [price, setPrice] = useState(existingPrice || "");
   const [product, setProduct] = useState(existingProduct || "");
   const [images, setImages] = useState(existingImages || []);
+  const [productProperties, setProductProperties] = useState({})
   const [category, setCategory] = useState(assignedCategory || "")
   const [desc, setDesc] = useState(existingDesc || "");
   const [loading, setLoading] = useState(false)
@@ -71,7 +72,8 @@ export default function ProductForm({
             desc,
             price,
             images,
-            category
+            category,
+            productProperties
           }),
         });
         router.push("/products");
@@ -90,7 +92,8 @@ export default function ProductForm({
             desc,
             price,
             images,
-            category
+            category,
+            productProperties
           }),
         });
         router.push("/products");
@@ -100,8 +103,28 @@ export default function ProductForm({
       }
     }
   }
+  function setProductProp(propName, value){
+    setProductProperties(prev => {
+      const newProductProps = {...prev}
+      newProductProps[propName] = value
+      return newProductProps
+    })
+
+  }
   function updateImagesOrder(images){
     setImages(images)
+  }
+  const propertiesToFill = []
+  if (categories?.length > 0 && category) {
+    let catInfo = categories?.find(({_id}) => _id === category)
+    if (catInfo.properties?.length > 0) {
+      propertiesToFill.push(...catInfo?.properties)
+    }    
+    while(catInfo.parent?._id) {
+      const parentCat = categories.find(({_id}) => _id === catInfo?.parent?._id)
+      propertiesToFill.push(...parentCat?.properties)
+      catInfo = parentCat
+    }
   }
 
   return (
@@ -123,6 +146,16 @@ export default function ProductForm({
             <option value={c._id} key={c._id}>{c.name}</option>
           ))}
         </select>
+        {categories.length > 0 && propertiesToFill.map((p, index) => (
+          <div key={index} className="flex gap-1">
+            <div>{p.name}</div>
+            <select value={productProperties[p.name]} onChange={(e)=> setProductProp(p.name, e.target.value)}>
+              {p.value.map((v, index) => (
+                <option key={index} value={v}>{v}</option>
+              ))}
+            </select>
+          </div>
+        ))}
         <label>Photos</label>
         <div className="mb-2 flex gap-2 flex-wrap">
             <ReactSortable list={images} setList={updateImagesOrder} className="flex flex-wrap gap-1">

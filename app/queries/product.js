@@ -9,10 +9,10 @@ export async function createProduct(products) {
         return error
     }
 }
-export async function updateProduct({id, product,desc, price, images, category}) {
-    console.log(id, product, desc, price, images, category)
+export async function updateProduct({id, products}) {
+    console.log(id, products)
     try {
-        return await Product.findByIdAndUpdate(id, { product: product, desc: desc, price: price, images: images, category: category })
+        return await Product.findByIdAndUpdate(id, { products })
     } catch (error) {
         return error
     }

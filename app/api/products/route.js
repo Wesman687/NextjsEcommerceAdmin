@@ -1,24 +1,22 @@
 import { NextResponse } from "next/server";
-import { createProduct, updateProduct } from "../../queries/product";
 import { Product } from "../../model/products";
 
 export const POST = async (request, res) => {
-  const { product, desc, price, images, category, productProperties} = await request.json();
+  const { product, desc, price, images, category, properties} = await request.json();
   const url = request.nextUrl.searchParams
   const id = url.get('id')
-  console.log('is this working?')
   
     if (id) {
-      console.log(product, desc, price, images, category, productProperties, "checking if update works")
-        const response = await updateProduct({id, product, desc, price, images, category, productProperties})
+      console.log(id, product, desc, price, images, category, properties, "checking if update works")
+        const response = await Product.findByIdAndUpdate(id, {product, desc, price, images, category, properties})
         throw new NextResponse("Product has been updated", {
           status: 201,
         });
       }
       
       else {
-        console.log(product, desc, price, images, category, productProperties, "checking if post works")
-        await createProduct({ product, desc, price, images, category, productProperties});
+        console.log(product, desc, price, images, category, properties, "checking if post works")
+        await Product.create({ product, desc, price, images, category, properties });
         throw new NextResponse("Product has been created", {
           status: 201,
         });

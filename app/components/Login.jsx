@@ -36,14 +36,14 @@ export default function Login() {
     <div className='text-xl text-red-500'>{error}</div>
     <form className='text-white my-5 flex flex-col items-center border p-3 border-gray-200 rounded-md w-fit'
     onSubmit={handleFormSubmit}>
-    <div className='my-2'>
-        <label htmlFor="email">Email Address</label>
-        <input className='border mx-2 border-grey-500 rounded text-black focus:text-black focus-within:text-black placeholder:text-black ' 
+    <div className='flex'>
+        <label htmlFor="email" className='text-white text-nowrap'>Email Address</label>
+        <input className='h-fit border mx-2 border-grey-500 rounded text-black focus:text-black focus-within:text-black placeholder:text-black ' 
          type='email' id='email' value={email} onChange={(event)=>setEmail(event.target.value)}/>
     </div>
-    <div>
-        <label htmlFor="password">Password</label>
-        <input className='border mx-2 border-gray-500 rounded ml-10 text-black focus:text-black focus-within:text-black placeholder:text-black'
+    <div className='flex'>
+        <label htmlFor="password" className='text-white mr-8'>Password</label>
+        <input className='border mx-2 border-gray-500 rounded text-black focus:text-black focus-within:text-black placeholder:text-black'
         type="password" name='password' id='password' value={password} onChange={(event)=>setPassword(event.target.value)} />
     </div>
     <button type='submit' className='bg-orange-300 mt-4 rounded flex justify-center items-center w-36'>Login</button>

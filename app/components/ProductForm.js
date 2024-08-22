@@ -11,12 +11,13 @@ export default function ProductForm({
   price: existingPrice,
   images: existingImages,
   category: assignedCategory,
+  properties: assignedProperties
 }) {
   const router = useRouter();
   const [price, setPrice] = useState(existingPrice || "");
   const [product, setProduct] = useState(existingProduct || "");
   const [images, setImages] = useState(existingImages || []);
-  const [productProperties, setProductProperties] = useState({})
+  const [productProperties, setProductProperties] = useState(assignedProperties || {})
   const [category, setCategory] = useState(assignedCategory || "")
   const [desc, setDesc] = useState(existingDesc || "");
   const [loading, setLoading] = useState(false)
@@ -73,7 +74,7 @@ export default function ProductForm({
             price,
             images,
             category,
-            productProperties
+            properties: productProperties,
           }),
         });
         router.push("/products");
@@ -93,7 +94,7 @@ export default function ProductForm({
             price,
             images,
             category,
-            productProperties
+            properties: productProperties
           }),
         });
         router.push("/products");
@@ -104,6 +105,7 @@ export default function ProductForm({
     }
   }
   function setProductProp(propName, value){
+    propertiesToFill = []
     setProductProperties(prev => {
       const newProductProps = {...prev}
       newProductProps[propName] = value
@@ -114,7 +116,7 @@ export default function ProductForm({
   function updateImagesOrder(images){
     setImages(images)
   }
-  const propertiesToFill = []
+  let propertiesToFill = []
   if (categories?.length > 0 && category) {
     let catInfo = categories?.find(({_id}) => _id === category)
     if (catInfo.properties?.length > 0) {

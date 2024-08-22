@@ -1,10 +1,13 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import Logout from './Logout'
 
 function Nav() {
   const inactiveLink = "flex gap-1 text-xl mb-2 p-1";
-  const activeLink = inactiveLink + " bg-white text-blue-900 rounded-l-lg shadow-black shadow-md shadow-right-non";
+  const activeLink =
+    inactiveLink +
+    " bg-white text-blue-900 rounded-l-lg shadow-black shadow-md shadow-right-non";
   const [pathname, setPathName] = useState("");
   useEffect(() => {
     setPathName(window.location.pathname);
@@ -150,6 +153,9 @@ function Nav() {
           </div>
         </Link>
       </nav>
+      
+        <Logout />
+      
     </aside>
   );
 }

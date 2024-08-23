@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isAdminRequest} from '../../actions'
 import cloudinary from 'cloudinary'
 import { writeFile } from "fs/promises";
 import fs from 'fs'
@@ -15,6 +16,10 @@ export const config = {
   }
 
 export const POST = async (req, res) => {
+  const adminRequest = await isAdminRequest()
+  if (!adminRequest) {
+    throw 'not an admin'
+  }
 
     const formData = await req.formData();
     const file = formData.get('file');

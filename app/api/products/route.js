@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { Product } from "../../model/products";
+import { isAdminRequest } from "../../actions";
 
 export const POST = async (request, res) => {
+  const adminRequest = await isAdminRequest()
+  if (!adminRequest) {
+    throw 'not an admin'
+  }
   const { product, desc, price, images, category, properties} = await request.json();
   const url = request.nextUrl.searchParams
   const id = url.get('id')
@@ -26,6 +31,10 @@ export const POST = async (request, res) => {
 };
 
 export const GET = async (request, res) => {
+  const adminRequest = await isAdminRequest()
+  if (!adminRequest) {
+    throw 'not an admin'
+  }
     const url = request.nextUrl.searchParams
     const id = url.get('id')
     try {
@@ -45,7 +54,11 @@ export const GET = async (request, res) => {
     
 };
 
-export const DELETE = async (req, res) => {    
+export const DELETE = async (req, res) => {  
+  const adminRequest = await isAdminRequest()
+  if (!adminRequest) {
+    throw 'not an admin'
+  }  
     const url = req.nextUrl.searchParams
     const id = url.get('id')
     try {

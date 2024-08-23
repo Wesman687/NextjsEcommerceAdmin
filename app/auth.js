@@ -5,6 +5,8 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
 import { User } from './model/user-model'
 
+
+
 export const {
     handlers: { GET, POST },
     auth,
@@ -67,11 +69,4 @@ export const {
             }
         })
     ], 
-    callbacks: {
-        jwt: ({token, account,profile}) => {
-            console.log({token, account,profile})
-            return token
-        }
-    }
 })
-

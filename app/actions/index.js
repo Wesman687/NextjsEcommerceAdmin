@@ -1,6 +1,7 @@
 'use server'
 
-import { signIn, signOut } from "../auth"
+import { auth, signIn, signOut } from "../auth"
+
 
 export async function doSocialLogin(formData) {
     const action = formData.get('action')
@@ -25,3 +26,14 @@ export async function doCredentialLogin(formData) {
         throw new Error(error)
     }
 } 
+
+const adminEmails= ['WESMAN687@GMAIL.COM']
+export async function isAdminRequest(){
+    const session = await auth()
+    if (session && adminEmails.includes(session?.user?.email.toUpperCase())){
+        return true
+    }
+    else {
+        return false
+    }
+}

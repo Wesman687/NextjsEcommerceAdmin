@@ -6,13 +6,16 @@ import Nav from "./Nav";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-export default function Layout({children}) {
+import { isAdminRequest } from "../actions";
+export default function Layout({children}) {  
+  const adminEmails= ['WESMAN687@GMAIL.COM']
   const router = useRouter()
   const [session, setSession] = useState()
   useEffect(()=>{
     const fetchSession = async () =>{
       const res = await axios.get('/api/user')
-      if (res?.data?.user) {
+      const adminRequest = await isAdminRequest()
+      if (adminRequest) {         
       setSession(res.data.user)
       }
       else {

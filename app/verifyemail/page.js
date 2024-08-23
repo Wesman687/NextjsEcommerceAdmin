@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-export default async function page() {
+export default function page() {
   const [token, setToken] = useState();
   const [verified, setVerified] = useState();
   useEffect(() => {

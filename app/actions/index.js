@@ -27,7 +27,7 @@ export async function doCredentialLogin(formData) {
     }
 } 
 
-const adminEmails= ['WESMAN687@GMAIL.COM']
+const adminEmails= ['WESMAN687@GMAIL.COM', 'GUEST@GUEST.COM']
 export async function isAdminRequest(){
     const session = await auth()
     if (session && adminEmails.includes(session?.user?.email.toUpperCase())){

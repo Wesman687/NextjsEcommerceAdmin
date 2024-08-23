@@ -32,8 +32,8 @@ export default function Login() {
     }
     }
   return (
-    <>
-    <div className='text-xl text-red-500'>{error}</div>
+    <div className='flex items-center flex-col'>
+    <div className='text-xl text-red-500 flex items-center'>{error}</div>
     <form className='text-white my-5 flex flex-col items-center border p-3 border-gray-200 rounded-md w-fit'
     onSubmit={handleFormSubmit}>
     <div className='flex'>
@@ -49,6 +49,6 @@ export default function Login() {
     <button type='submit' className='bg-orange-300 mt-4 rounded flex justify-center items-center w-36'>Login</button>
     </form>
     <SocialLogin />
-    </>
+    </div>
   )
 }

@@ -1,8 +1,8 @@
-import { User } from "@/model/user-modal"
+import { User } from "../model/user-model"
 
 
 
-export async function createUser(user) {
+export default async function createUser(user) {
     try {
         return await User.create(user)
     } catch (error) {

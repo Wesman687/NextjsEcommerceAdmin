@@ -40,7 +40,7 @@ function Products() {
                 <tr key={index}>
                   <td>{product?.product}</td>
                   <td>
-                    <Link href={"/products/edit/" + product._id}>
+                    <Link href={"/products/edit/" + product._id} className="btn-primary">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -57,7 +57,7 @@ function Products() {
                       </svg>
                       Edit
                     </Link>
-                    <Link href={"/products/delete/" + product._id}>
+                    <Link href={"/products/delete/" + product._id} className="btn-red">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

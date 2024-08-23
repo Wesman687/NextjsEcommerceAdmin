@@ -149,43 +149,49 @@ export default function ProductForm({
           ))}
         </select>
         {categories.length > 0 && propertiesToFill.map((p, index) => (
-          <div key={index} className="flex gap-1">
-            <div>{p.name}</div>
+          <div key={index} className="flex gap-1 flex-col">
+            <div className="text-blue-900">{p.name[0].toUpperCase()+p.name.substring(1)}:</div>
+            <div className="w-fit">
             <select value={productProperties[p.name]} onChange={(e)=> setProductProp(p.name, e.target.value)}>
               {p.value.map((v, index) => (
                 <option key={index} value={v}>{v}</option>
               ))}
             </select>
           </div>
+          </div>
         ))}
         <label>Photos</label>
         <div className="mb-2 flex gap-2 flex-wrap">
-            <ReactSortable list={images} setList={updateImagesOrder} className="flex flex-wrap gap-1">
+            <ReactSortable list={images} setList={updateImagesOrder} className="flex flex-wrap gap-">
           {!!images?.length &&
             images.map((item, index) => (
-              <div key={index} className="relative px-2">
-                <img src={item.link} className="h-24 max-w-24 rounded-md"></img>
+              <>
+              <div key={index} className="relative mx-2 bg-white p-2 shadow-sm rounded-sm border-gray-200 flex justify-center">
+                <img src={item.link} className="h-24 max-w-24  overflow-hidden rounded-sm hover:scale-125 cursor-pointer"></img>
 
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 absolute top-0 text-red-600 cursor-pointer"
-                  onClick={() => removeImage(index, item.public_id)}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18 18 6M6 6l12 12"
-                  />
-                </svg>
+                
               </div>
+              <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 absolute top-0 text-red-600 cursor-pointer"
+              onClick={() => removeImage(index, item.public_id)}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+            </>
             ))}
             </ReactSortable>
           {uploading ? <div className="h-24 p-1 bg-gray-200 flex items-center rounded-md"><Spinner /></div> : 
-          <label className="cursor-pointer w-24 h-24 flex items-center text-center justify-center gap-1 text-gray-500 rounded-md bg-gray-200">
+          <label className="cursor-pointer   gap-1 text-gray-500 rounded-md bg-white p-4 shadow-sm border-gray-200">
+            <div className=" w-24 h-24 items-center text-center justify-center flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -207,6 +213,7 @@ export default function ProductForm({
               onChange={uploadImages}
               className="hidden"
             />
+            </div>
           </label> }         
         
         </div>

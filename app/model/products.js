@@ -12,6 +12,8 @@ const ProductSchema = new Schema({
   ],
   category: {type:mongoose.Types.ObjectId, ref: 'category', required:false},
   properties: { type:Object}
+},{
+  timestamps: true,
 });
 export const Product =
   mongoose.models.product || model("product", ProductSchema);

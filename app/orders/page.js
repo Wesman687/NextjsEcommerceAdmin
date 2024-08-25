@@ -16,16 +16,27 @@ export default function OrderPage() {
     <Layout>
       <h1>Orders</h1>
       <table className='basic'>
-        <th>ID</th>
+        <th>Date</th>
         <th>Recipient</th>
         <th>Products</th>
       </table>
       <tbody>
-        {orders?.map((order)=>(
+        {orders?.length > 0 && orders?.map((order)=>(
             <tr key={order._id}>
-               <td>{order._id}</td>
-               <td>{order.name}</td>
-               <td></td>
+               <td>{order?.createdAt?.slice(0,10)}<br /> Total: ${order.total}</td>
+               <td>{order.name}<br />
+               {order.email}<br />
+               {order.city} {order.state}<br />
+               {order.address}<br />
+               {order.postal}
+               </td>
+               {order.line_items.map((product)=> (
+                    <td>
+                        {product?.price_data?.product_data?.name}<br />     Quantity: {product?.quantity}      Price: ${product?.price_data?.unit_amount / 1000}
+                    </td>
+               ))}
+
+               
             </tr>
         ))}
 

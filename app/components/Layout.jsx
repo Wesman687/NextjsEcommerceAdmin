@@ -52,7 +52,7 @@ export default function Layout({ children }) {
         <div className="flex">
           <Nav show={show} />
           <>
-            <div className="bg-[#fbfafd] flex-grow m-2 md:ml-0 rounded-lg p-4 shadow-lg shadow-black md:h-[95vh]">
+            <div className="bg-[#fbfafd] flex-grow m-2 md:ml-0 rounded-lg p-4 shadow-lg shadow-black md:h-[95vh] overflow-scroll">
               {children}
             </div>
           </>

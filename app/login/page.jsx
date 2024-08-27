@@ -10,7 +10,7 @@ function LoginPage() {
       <div className="flex flex-col ml-4">
         <Login />
         <p className="my-3">
-          Don't have an account?
+          Dont have an account?
           <Link href="register" className="mx-2 underline text-blue-600">
             Register
           </Link>

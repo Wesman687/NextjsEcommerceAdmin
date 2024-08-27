@@ -167,7 +167,7 @@ export default function ProductForm({
             images.map((item, index) => (
               <>
               <div key={index} className="relative mx-2 bg-white p-2 shadow-sm rounded-sm border-gray-200 flex justify-center">
-                <img src={item.link} className="h-24 max-w-24  overflow-hidden rounded-sm hover:scale-125 cursor-pointer"></img>
+                <img src={item.link} alt="" className="h-24 max-w-24  overflow-hidden rounded-sm hover:scale-125 cursor-pointer"></img>
 
                 
               </div>

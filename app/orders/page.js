@@ -35,7 +35,7 @@ export default function OrderPage() {
                {order.postal}
                </td>
                {order.line_items.map((product)=> (
-                    <td className='text-right'>
+                    <td className='text-right' key={product?._id}>
                         {product?.price_data?.product_data?.name}<br />     Quantity: {product?.quantity}      Price: ${(product?.price_data?.unit_amount / 100).toFixed(2)}
                     </td>
                ))}

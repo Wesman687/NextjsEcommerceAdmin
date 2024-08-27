@@ -1,3 +1,4 @@
+/*
 import { NextResponse } from "next/server";
 import { isAdminRequest} from '../../actions'
 import cloudinary from 'cloudinary'
@@ -70,4 +71,4 @@ export const POST = async (req, res) => {
 //     return NextResponse.json({ Message: "Failed", status: 500 });
 //   }
   return NextResponse.json({ Message: "Failed", status: 500 });
-};
+};*/

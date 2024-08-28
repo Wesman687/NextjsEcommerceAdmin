@@ -49,7 +49,7 @@ export default function VerifyEmail() {
             {token > 0 && <button className="p-2 rounded-md text-l text-blue-600 my-2 bg-yellow-200" onClick={()=>{
               clickToVerify()              
               
-              }}>"Click to Verify"</button>}
+              }}>Click to Verify</button>}
               <button className="p-2 rounded-md text-l text-white my-2 bg-green-400" onClick={()=>{4
               resendEmail()              
               

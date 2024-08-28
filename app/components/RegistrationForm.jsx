@@ -3,6 +3,7 @@ import React from 'react'
 import SocialLogins from './SocialLogin'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 export default function RegistrationForm() {
     const router = useRouter()
@@ -14,22 +15,13 @@ export default function RegistrationForm() {
         const password = formData.get('password')
         if (name && email && password) {
         try {
-            const response = await fetch('/api/register', {
-                method: 'POST',
-                headers: {
-                    'content-type': "application/json",
-                },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    password
-                })
-            })
+            const response = await axios.post('/api/register', {name,
+                email,
+                password})
             const  data  = response.data
-            console.log(response, 'response', data)
-            if (response.status != 201) return
+            if (response.status != 200) return
             else {
-                router.push('/verifyemail?uid=' + data.uid + '?email=' + data.email)
+                router.push('/verifyemail?uid=' + data.uid)
             }
             
         } catch (e) {

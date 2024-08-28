@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 import { sendEmail } from "../../utils/mailhelper"
 import createUser from '../../queries/user'
 
-export const POST = async (request) => {
+export const POST = async (request, response) => {
     const { name, email, password } = await request.json()
     // Create a db connection
     await dbConnect()
@@ -16,11 +16,11 @@ export const POST = async (request) => {
     }
     //update the db
     const savedUser = await createUser(newUser)
-    console.log('sending email from register')
     sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
-    return Response.json({
-        status: 201,
+    console.log(email, savedUser._id)
+    const data = {
         email: email,
         uid: savedUser._id
-    })
+    }
+    return Response.json(data)
 }

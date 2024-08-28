@@ -18,8 +18,7 @@ export const POST = async (request) => {
     const savedUser = await createUser(newUser)
     console.log('sending email from register')
     sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
-
-    return new NextResponse("User has been created", {
+    return Response.json({
         status: 201,
         email: email,
         uid: savedUser._id

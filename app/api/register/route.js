@@ -16,6 +16,7 @@ export const POST = async (request) => {
     }
     //update the db
     const savedUser = await createUser(newUser)
+    console.log('sending email from register')
     sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
 
     return new NextResponse("User has been created", {

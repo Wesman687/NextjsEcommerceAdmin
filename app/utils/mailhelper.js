@@ -4,6 +4,7 @@ import bcryptjs from "bcryptjs";
 import { dbConnect } from "../lib/mongo";
 
 export const sendEmail = async ({ email, emailType, userId }) => {
+  console.log('sending email from send')
    await dbConnect()
   try {
     const hasToken = await bcryptjs.hash(userId.toString(), 10);
@@ -36,6 +37,7 @@ export const sendEmail = async ({ email, emailType, userId }) => {
       html: `<p>Click <a href=${process.env.DOMAIN}/verifyemail?token=${hasToken}>
        to verify</a> to ${emailType === 'VERIFY' ? "verify your email" : "reset your password"} </p>`, // html body
     }
+    console.log('made it to end, hanginging up at transporter')
     const mailResponse = await transporter.sendMail(mailOptions);
     return mailResponse;
   } catch (error) {

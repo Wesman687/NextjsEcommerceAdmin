@@ -15,16 +15,15 @@ export async function doLogOut() {
 }
 
 export async function doCredentialLogin(formData) {
-    try {
+    console.log("credential")
+    
         const response = await signIn('credentials', {
             email: formData.get('email'),
             password: formData.get('password'),
             redirect: false
         })
         return response
-    } catch (error) {
-        throw new Error(error)
-    }
+    
 } 
 
 const adminEmails= ['WESMAN687@GMAIL.COM', 'GUEST@GUEST.COM']

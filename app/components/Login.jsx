@@ -24,7 +24,7 @@ export default function Login() {
 
         } catch (error) {
             console.log(error.message)
-            setError("Check your Credentials")
+            setError("Check your Credentials", error.message)
         }
     }
     else {

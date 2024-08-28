@@ -16,7 +16,7 @@ export const POST = async (request, response) => {
     }
     //update the db
     const savedUser = await createUser(newUser)
-    await sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
+    sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
     console.log(email, savedUser._id)
     const data = {
         email: email,

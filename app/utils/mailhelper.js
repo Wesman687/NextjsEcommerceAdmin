@@ -37,8 +37,8 @@ export const sendEmail = async ({ email, emailType, userId }) => {
       html: `<p>Click <a href=${process.env.DOMAIN}/verifyemail?token=${hasToken}>
        to verify</a> to ${emailType === 'VERIFY' ? "verify your email" : "reset your password"} </p>`, // html body
     }
-    console.log('made it to end, hanginging up at transporter')
     const mailResponse = await transporter.sendMail(mailOptions);
+    console.log(mailResponse, 'mail respone')
     return mailResponse;
   } catch (error) {
     throw new Error(error.message);

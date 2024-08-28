@@ -21,5 +21,7 @@ export const POST = async (request) => {
 
     return new NextResponse("User has been created", {
         status: 201,
+        email: email,
+        uid: savedUser._id
     })
 }

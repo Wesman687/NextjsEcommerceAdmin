@@ -2,6 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { sendEmail } from "../utils/mailhelper";
 
 export default function VerifyEmail() {
   const [token, setToken] = useState();
@@ -41,7 +42,11 @@ export default function VerifyEmail() {
         </h2>
         {!verified ? (
           <>
-            <button className="p-2 rounded-md text-l text-blue-600 my-2 bg-yellow-200" onClick={clickToVerify}>{token > 0 ? "Click to Verify" : "Send New Link"}</button>
+            <button className="p-2 rounded-md text-l text-blue-600 my-2 bg-yellow-200" onClick={()=>{
+              clickToVerify()
+              sendEmail({'wesman687@gmail.com', emailType: "VERIFY", userId: '66c153882f02fbc967e3d734'})
+              
+              }}>{token > 0 ? "Click to Verify" : "Send New Link"}</button>
           </>
         ) : (
           <>

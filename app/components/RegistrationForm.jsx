@@ -25,6 +25,7 @@ export default function RegistrationForm() {
                     password
                 })
             })
+            console.log(response)
             if (response.status != 201) return
             else {
                 router.push('/verifyemail')

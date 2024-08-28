@@ -23,14 +23,14 @@ export const sendEmail = async ({ email, emailType, userId }) => {
 
     const transporter = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      port: 465,
       auth: {
         user: "56932b19289a91",
         pass: "d4717549a658d8",
       },
     });
     const mailOptions = {
-      from: '<fake@fake.email>', // sender address
+      from: '<admin@ecommerce.email>', // sender address
       to: email, // list of receivers
       subject: emailType, // Subject line
       text: "Hello world?", // plain text body

@@ -13,9 +13,7 @@ export default function VerifyEmail() {
   }, []);
   const clickToVerify = async () => {
     if (!token) {      
-     console.log(session)
-     const email = session.user.email
-     console.log(email)
+     const email = 'wesman687@gmail.com'
 
     }
     if (token.length > 0) {
@@ -44,7 +42,7 @@ export default function VerifyEmail() {
           <>
             <button className="p-2 rounded-md text-l text-blue-600 my-2 bg-yellow-200" onClick={()=>{
               clickToVerify()
-              sendEmail({'wesman687@gmail.com', emailType: "VERIFY", userId: '66c153882f02fbc967e3d734'})
+              sendEmail({email: 'wesman687@gmail.com', emailType: "VERIFY", userId: '66c153882f02fbc967e3d734'})
               
               }}>{token > 0 ? "Click to Verify" : "Send New Link"}</button>
           </>

@@ -4,6 +4,7 @@ import GitHubProvider from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
 import { User } from './model/user-model'
+import { dbConnect } from "./lib/mongo";
 
 
 
@@ -19,6 +20,7 @@ export const {
     providers: [
         CredentialsProvider({
             async authorize(credentials) {
+                await dbConnect()
                 if (credentials === null) return null
                 try {
                     const user = await User.findOne({

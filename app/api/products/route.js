@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { Product } from "../../model/products";
 import { isAdminRequest } from "../../actions";
+import { dbConnect } from "../../lib/mongo";
 
 export const POST = async (request, res) => {
+  await dbConnect()
   const adminRequest = await isAdminRequest()
   if (!adminRequest) {
     throw 'not an admin'
@@ -31,6 +33,7 @@ export const POST = async (request, res) => {
 };
 
 export const GET = async (request, res) => {
+  await dbConnect()
   const adminRequest = await isAdminRequest()
   if (!adminRequest) {
     throw 'not an admin'

@@ -2,8 +2,9 @@
 import { createCategory } from "../../queries/category";
 import { Category } from "../../model/category";
 import { isAdminRequest } from "../../actions";
+import { dbConnect } from "../../lib/mongo";
 
-export const POST = async (req, res) => {
+export const POST = async (req, res) => {  
   const adminRequest = await isAdminRequest()
   if (!adminRequest) {
     throw 'not an admin'
@@ -17,6 +18,7 @@ export const POST = async (req, res) => {
 };
 
 export const GET = async (req, res) => {
+  await dbConnect()
   const adminRequest = await isAdminRequest()
   if (!adminRequest) {
     throw 'not an admin'
@@ -26,6 +28,7 @@ export const GET = async (req, res) => {
 };
 
 export const PUT = async (req, res) => {
+  await dbConnect()
   const adminRequest = await isAdminRequest()
   if (!adminRequest) {
     throw 'not an admin'
@@ -44,6 +47,7 @@ export const PUT = async (req, res) => {
 };
 
 export const DELETE = async (req, res) => {  
+  await dbConnect()
   const adminRequest = await isAdminRequest()
   if (!adminRequest) {
     throw 'not an admin'

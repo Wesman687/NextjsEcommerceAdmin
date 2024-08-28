@@ -16,7 +16,7 @@ export const POST = async(req,res )=>{
     await dbConnect()
     const {id} = await req.json()
     const newUser = await User.findById(id)
-    sendEmail({ email: newUser.email, emailType: "VERIFY", userId: id})
+    await sendEmail({ email: newUser.email, emailType: "VERIFY", userId: id})
     return Response.json('Email Sent')
 
 }

@@ -25,8 +25,8 @@ export default function RegistrationForm() {
                     password
                 })
             })
-            const { data } = response.data
-            console.log(response.data)
+            const  data  = response.data
+            console.log(response, 'response', data)
             if (response.status != 201) return
             else {
                 router.push('/verifyemail?uid=' + data.uid + '?email=' + data.email)

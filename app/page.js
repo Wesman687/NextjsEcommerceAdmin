@@ -12,7 +12,7 @@ export default async function Home() {
         <img className='rounded-lg w-6 h-6' src={session?.user?.image} />
         <span className='px-2'>
         {session?.user?.name}
-        </span>
+        </span>        
         </div>
       </div>
       </Layout>

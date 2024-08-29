@@ -2,6 +2,7 @@ import mongoose, { model, Schema } from "mongoose";
 
 const ProductSchema = new Schema({
   product: { type: String, required: true },
+  pid: {type: Number, required: true},
   desc: { type: String, required: false },
   price: { type: Number, required: true },
   images: [

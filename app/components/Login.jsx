@@ -39,12 +39,12 @@ export default function Login() {
     <div className='flex'>
         <label htmlFor="email" className='text-white text-nowrap'>Email Address</label>
         <input className='h-fit border mx-2 border-grey-500 rounded text-black focus:text-black focus-within:text-black placeholder:text-black ' 
-         type='email' id='email' value={email} onChange={(event)=>setEmail(event.target.value)}/>
+         type='email' id='email' placeholder='Email@email.com' value={email} onChange={(event)=>setEmail(event.target.value)}/>
     </div>
     <div className='flex'>
         <label htmlFor="password" className='text-white mr-8'>Password</label>
         <input className='border mx-2 border-gray-500 rounded text-black focus:text-black focus-within:text-black placeholder:text-black'
-        type="password" name='password' id='password' value={password} onChange={(event)=>setPassword(event.target.value)} />
+        type="password" name='password' id='password' placeholder='Password' value={password} onChange={(event)=>setPassword(event.target.value)} />
     </div>
     <button type='submit' className='bg-orange-300 mt-4 rounded flex justify-center items-center w-36'>Login</button>
     </form>

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Product } from "../../model/products";
-import { isAdminRequest } from "../../actions";
+import { getPid, isAdminRequest } from "../../actions";
 import { dbConnect } from "../../lib/mongo";
 
 export const POST = async (request, res) => {
@@ -15,7 +15,7 @@ export const POST = async (request, res) => {
   
     if (id) {
       console.log(id, product, desc, price, images, category, properties, "checking if update works")
-        const response = await Product.findByIdAndUpdate(id, {product, desc, price, images, category, properties})
+        const response = await Product.findByIdAndUpdate(id, {product, desc, price, images, category  , properties})
         throw new NextResponse("Product has been updated", {
           status: 201,
         });
@@ -23,7 +23,9 @@ export const POST = async (request, res) => {
       
       else {
         console.log(product, desc, price, images, category, properties, "checking if post works")
-        await Product.create({ product, desc, price, images, category, properties });
+        const productPid = await getPid()
+        console.log(productPid, 'PRODUCT PID')
+        await Product.create({ product, desc, price, images, category, properties, pid: productPid});
         throw new NextResponse("Product has been created", {
           status: 201,
         });

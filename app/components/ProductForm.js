@@ -166,18 +166,17 @@ export default function ProductForm({
           {!!images?.length &&
             images.map((item, index) => (
               <>
-              <div key={index} className="relative mx-2 bg-white p-2 shadow-sm rounded-sm border-gray-200 flex justify-center">
-                <img src={item.link} alt="" className="h-24 max-w-24  overflow-hidden rounded-sm hover:scale-125 cursor-pointer"></img>
-
+              <div key={index} className="mx-2 bg-white p-2 relative shadow-sm rounded-sm border-gray-200 flex justify-center">
                 
-              </div>
+                <img src={item.link} alt="" className="h-24 max-w-24  overflow-hidden rounded-sm hover:scale-125 cursor-pointer"></img>
+                
               <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 absolute top-0 text-red-600 cursor-pointer"
+              className="w-6 h-6 text-red-600 absolute z-50 top-0 left-0 cursor-pointer"
               onClick={() => removeImage(index, item.public_id)}
             >
               <path
@@ -186,6 +185,7 @@ export default function ProductForm({
                 d="M6 18 18 6M6 6l12 12"
               />
             </svg>
+            </div>
             </>
             ))}
             </ReactSortable>

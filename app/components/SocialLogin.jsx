@@ -33,14 +33,6 @@ export default function SocialLogin() {
         >
           Sign in With Google
         </button>
-        <button
-          className="bg-black text-white p-1 rounded-md m-1 text-lg"
-          type="submit"
-          name="action"
-          value="github"
-        >
-          Sign in With Github
-        </button>
       </form>
       <button onClick={guestLogin} className="bg-orange-400 text-white p-1 rounded-md m-1 text-lg">
         Sign in as Guest

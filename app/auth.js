@@ -23,9 +23,7 @@ export const {
                 await dbConnect()
                 if (credentials === null) return null
                 try {
-                    const user = await User.findOne({
-                        email: credentials?.email
-                    })
+                    const user = await User.findOne({ email: { $regex: new RegExp(credentials?.email, 'i') } })
                     
                     if (user){
                         const isMatch = await bcrypt.compare(
